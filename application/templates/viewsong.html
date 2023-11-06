@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block profile %}
+{% block search %}
+
+{% endblock search %}
+<p class="lofi">
+  <a class="nav-link" href="/logout">Logout</a>
+</p>
+{% endblock profile %}
+{% block sidenav %}
+
+{% endblock sidenav %}
+{% block body %}
+
+{% for Song in songs %}
+<p class="lofi">
+  Song Name: {{song.name}} <br>
+  Song Genre: {{song.genre}} <br>
+  Song Duration: {{song.duration}} <br>
+  Song Artist: {{song.artist_id}} <br>
+  Song Date: {{song.date}} <br>
+  Song Lyrics: {{song.lyrics}} <br>
+</p>
+
+{% endfor %}
+
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <td>S.No.</td>
+        <td>name</td>
+        <td>genre</td>
+        <td>duration</td>
+        <td>artist_id</td>
+        <!-- <td>image</td> -->
+        <td>date</td>
+        <td>lyrics</td>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for song in songs %}
+      <tr>
+        <td>{{song.index(product)+1}}</td>
+        <td>{{song.name}}</td>
+        <td>{{song.genre}}</td>
+        <td>{{song.duration}}</td>
+        <td>{{song.artist_id}}</td>
+        <!-- <td>{{song.image}}</td> -->
+        <td>{{song.date}}</td>
+        <td>{{song.lyrics}}</td>
+        <td>
+          <a href="/editsong/{{song.id}}" class="btn btn-sm btn-primary">Update</a>
+          <a href="/deletesong/{{song.id}}" class="btn btn-sm btn-danger">Deleted</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

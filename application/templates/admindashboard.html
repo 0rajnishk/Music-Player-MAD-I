@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block profile %}
+<a class="lofi" href="/logout">Logout</a>
+{% endblock profile %}
+
+{% block search %}
+
+{% endblock %}
+
+{% block head %}
+{% endblock head %}
+
+{% block nav %}
+
+{% endblock nav %}
+{% block sidenav %}
+<div class="sidenav" style="width: 300px;">
+  <div class="admin_db" style="margin-top:-50px;">
+    <div class="side-nav-div" style="font-weight: bold;">
+
+      <ul class="sidenav__list">
+        <li>
+          <h3 style="color: rgb(0, 0, 0);">SwaraSangh</h3>
+        </li>
+        <!-- <li class="list"><a href="#" class="sidenav__list-item">Dashboard</a></li> -->
+        <li class="list"><a href="#" class="sidenav__list-item">Content Management</a></li>
+        <p class="sublist subblist" style="margin-left:40px;"><a href="/addsong">Add
+            song</a></p>
+        <p class="sublist" style="margin-left:40px;"><a href="/addalbum">Add album</a></p>
+        <li class="list"><a href="#" class="sidenav__list-item">User Management</a></li>
+        <li class="list"><a href="#" class="sidenav__list-item">logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock sidenav %}
+
+{% block body %}
+
+<div>
+  <div class="row">
+    <div class="content">
+      {% if albums|length==0 %}
+      <p>No Albums or songs created.</p>
+      {% else %} {% for album in albums %}
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">{{album.name}}</h5>
+          {% if album.quantity==0 %}
+          <p class="card-text">No products created</p>
+          {% else %}
+          <p class="card-text">Total Products: {{album.quantity}}</p>
+          {% endif %}
+          <a href="/addsong/{{album.id}}" class="btn btn-primary">+</a>
+          <a href="/editalbum/{{album.id}}" class="btn btn-primary">Edit</a>
+          <a href="/deletealbum/{{album.id}}" class="btn btn-primary">delete</a>
+          <a href="/viewsong/{{album.id}}" class="btn btn-primary">View</a>
+        </div>
+      </div>
+      {% endfor %} {% endif %}
+    </div>
+  </div>
+
+  {% endblock body %}

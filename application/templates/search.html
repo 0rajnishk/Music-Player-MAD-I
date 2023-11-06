@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% if user %}
+<p class="h5">Welcome {{user}}!</p>
+<h6><a href="/viewcart">My cart</a></h6>
+<p></p><a href="/logout">Logout</a></p>
+{% else %}
+
+<p id="login" class="lofi">Login</p>
+<p id="register" class="lofi">Register</p>
+{% endif %}
+{% block body %}
+
+
+
+<div class="container mt-4">
+    <h1>Search Results</h1>
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2>{{product.name}}</h2>
+                </div>
+                <div class="card-body">
+                    <p>{{product.rateperunit}}</p>
+                    <a href="/getproduct/{{product.id}}" class="btn btn-secondary">view Products</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Add more result divs as needed -->
+</div>
+
+{% endblock body %}

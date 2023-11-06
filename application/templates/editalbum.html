@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block profile %}
+{% block search %}
+{% endblock %}
+<a class="nav-link" href="/logout">Logout</a>
+{% endblock profile %}
+{% block sidenav %}
+
+{% endblock sidenav %}
+{% block body %}
+<div class="addalbum">
+  <form action="/editalbum/{{album.id}}" method="post">
+    <div class="mb-3">
+      <label for="category" class="form-label">Album Name</label>
+      <input type="text" class="form-control" id="category" value="{{album.name}}" name="name">
+      <label for="genre" class="form-label">Genre</label>
+      <input type="text" class="form-control" id="genre" value="{{album.genre}}" name="genre">
+      <label for="artist" class="form-label">Artist</label>
+      <input type="text" class="form-control" id="artist" value="{{album.artist}}" name="artist">
+
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+  {% endblock body %}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SwaraSangh</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}" />
+  <style>
+    .sidenav {
+      grid-area: sidenav;
+      display: flex;
+      flex-direction: column;
+      padding-top: 40px;
+      height: 100%;
+      width: 240px;
+      position: fixed;
+      overflow-y: auto;
+      transition: all .6s ease-in-out;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+      z-index: 2;
+      /* Needs to sit above the hamburger menu icon */
+      background-color: #ffffff;
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+
+    .sidenav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .side-nav-div {
+      margin-top: 20px;
+      padding: auto;
+    }
+
+    .list {
+      padding-top: 20px;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .sidenav {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    .sidenav__list {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin: 0;
+      margin-top: 30px;
+      padding: auto;
+      list-style: none;
+    }
+
+    .sidenav__list a {
+      text-decoration: none;
+    }
+
+    .sidenav__list-item {
+      padding: 20px 20px 20px 20px;
+      color: rgb(0, 0, 0);
+      padding-top: 30px;
+      font-size: 18px;
+    }
+
+    .sidenav__list-item:hover {
+      color: rgb(0, 81, 255);
+    }
+  </style>
+</head>
+
+<body>
+  {% block nav %}
+  <nav class="navbar">
+    <div class="logo">
+      <h4>SwaraSangh</h4>
+    </div>
+    {% block search %}
+    <form action="/search" method="post" class="search-bar">
+      <input type="text" name="search" placeholder="What do you want to listen to?" />
+      <button type="button">Search</button>
+    </form>
+    {% endblock %}
+
+    {% block profile %}
+    <div class="nav-links">
+      <p id="login" class="lofi">Login</p>
+      <p id="register" class="lofi">Register</p>
+      {% endblock profile %}
+    </div>
+  </nav>
+  {% endblock nav %}
+
+
+  {% block sidenav %}
+  <div class="sidenav">
+    <div class="side-nav-div">
+
+      <ul class="sidenav__list">
+        <li>
+          <h3 style="color: black;">Browse</h3>
+        </li>
+        <li class="list"><a href="#newreleases" class="sidenav__list-item">New Releases</a></li>
+        <li class="list"><a href="#" class="sidenav__list-item">Trending</a></li>
+        <li class="list"><a href="#" class="sidenav__list-item">Top Artists</a></li>
+        <li class="list"><a href="#" class="sidenav__list-item">Top Playlists</a></li>
+        <br>
+        <hr color="black" width="120%" size="10" style="margin-left: -40px; ">
+
+        <li>
+          <h5 style="color: rgb(0, 0, 0); ">Recently Played</h5>
+        <li class="list"><a href="#" class="sidenav__list-item"></a></li>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+  {% endblock sidenav %}
+
+  {% block body %} {% endblock body %}
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+  integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+  integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>

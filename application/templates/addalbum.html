@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block profile %}
+{% block search %}
+{% endblock %}
+<a class="lofi" href="/logout">Logout</a>
+{% endblock profile %}
+{% block sidenav %}
+{% endblock sidenav %}
+{% block body %}
+<div class="addalbum">
+  <form action="/addalbum" method="post">
+    <div class="mb-3">
+      <label for="category" class="form-label">Name</label>
+      <input type="text" class="form-control" id="category" name="name" maxlength="40" required>
+      <label for="genre" class="form-label">Genre</label>
+      <input type="text" class="form-control" id="genre" name="genre" maxlength="40" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+{% endblock body %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block profile %}
+
+{% block search %}
+{% endblock %}
+<a class="nav-link" href="/logout">Logout</a>
+{% endblock profile %}
+{% block body %}
+
+{% block sidenav %}
+
+{% endblock sidenav %}
+<div class="container">
+    <div class="form-box">
+        <h2 class="mb-4 text-center">Add Product</h2>
+        <form action="/addsong/{{ artist.id }}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Song Name</label>a
+                <input type="text" name="name" placeholder="Song Name" class="form-control" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lyrics">Lyrics</label>
+                <input type="text" name="lyrics" placeholder="lyrics" class="form-control" id="lyrics" required>
+            </div>
+            <div class="form-group">
+                <label for="date-created">Date created</label>
+                <input type="date" name="date_created" placeholder="Enter Manufacture Date" class="form-control"
+                    id="date-created" required>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre</label>
+                <input type="text" name="genre" placeholder="genre" class="form-control" step="0.1" id="genre" required>
+            </div>
+            <div class="form-group">
+                <label for="song-cover">Upload song cover</label>
+                <input type="file" name="image" id="song-cover" required>
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duration</label>
+                <input type="number" name="duration" placeholder="duration" class="form-control" id="duration"
+                    step="0.001">
+                <div class="text-center">
+                    <input type="submit" value="submit" class="btn btn-primary mt-3">
+                </div>
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

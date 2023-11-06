@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block profile %}
+<a class="lofi" href="/logout">Logout</a>
+{% endblock profile %}
+
+{% block search %}
+
+{% endblock %}
+
+{% block head %}
+{% endblock head %}
+
+{% block nav %}
+
+{% endblock nav %}
+
+{% block sidenav %}
+
+{% if creator %}
+<div class="sidenav" style="width: 300px;">
+    <div class="admin_db" style="margin-top:-50px;">
+        <div class="side-nav-div" style="font-weight: bold;">
+
+            <ul class="sidenav__list">
+                <li>
+                    <h3 style="color: rgb(0, 0, 0);">SwaraSangh</h3>
+                </li>
+                <!-- <li class="list"><a href="#" class="sidenav__list-item">Dashboard</a></li> -->
+                <li class="list"><a href="#" class="sidenav__list-item">Content Management</a></li>
+                <p class="sublist subblist" style="margin-left:40px;"><a href="/addsong">Add
+                        song</a></p>
+                <p class="sublist" style="margin-left:40px;"><a href="/addalbum">Add album</a></p>
+                <li class="list"><a href="#" class="sidenav__list-item">User Management</a></li>
+                <li class="list"><a href="#" class="sidenav__list-item">logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+{% block creator_button %}
+<div class="creator-button">
+    <a href="/creator?H=True">
+        <span>Become a Creator</span>
+    </a>
+</div>
+{% endblock %}
+
+<style>
+    .creator-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .creator-button a {
+        display: inline-block;
+        position: relative;
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 1rem 2rem;
+        background-color: #ff6b6b;
+        border-radius: 50px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .creator-button a:hover {
+        background-color: #ff4757;
+    }
+
+    .creator-button a span {
+        position: relative;
+        z-index: 1;
+    }
+
+    .creator-button a:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ff4757;
+        border-radius: 50px;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: all 0.3s ease;
+    }
+
+    .creator-button a:hover:before {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+</style>
+
+
+{% endif %}
+
+{% endblock sidenav %}

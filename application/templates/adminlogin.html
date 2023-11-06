@@ -1,0 +1,20 @@
+{% extends 'login.html' %}
+{% block login_signup %}
+<div class="container">
+    <div class="frontbox" style="margin-right: 150px;">
+        <div class="login">
+            <div class="login">
+
+                <h2>LOG IN</h2>
+                <form action="{{ url_for('adminlogin') }}" method="POST">
+                    <div class="inputbox">
+                        <input type="text" name="email" placeholder="EMAIL">
+                        <input type="password" name="password" placeholder="PASSWORD">
+                    </div>
+                    <button type="submit" style="bottom:80px;">LOG IN</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock login_signup %}
