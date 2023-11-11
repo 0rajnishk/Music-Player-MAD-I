@@ -1,4 +1,3 @@
-
 from application.database import db
 
 class User(db.Model):
@@ -40,10 +39,10 @@ class Song(db.Model):
     date = db.Column(db.String)
     lyrics = db.Column(db.String(128), nullable=False)
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'), nullable=False)
-    album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=False)
+    album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=True)
     ratings = db.relationship('SongRating', backref='song', lazy=True)
 
-    def __init__(self, name, genre, duration, artist_id, image, date, lyrics):
+    def __init__(self, name, genre, duration, artist_id, image, date, lyrics, album_id):
         self.name = name
         self.genre = genre
         self.duration = duration
@@ -51,6 +50,7 @@ class Song(db.Model):
         self.image = image
         self.date = date
         self.lyrics = lyrics
+        self.album_id = album_id
 
 class Artist (db.Model):
     id = db.Column(db.Integer, primary_key=True)

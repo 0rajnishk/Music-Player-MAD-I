@@ -3,6 +3,7 @@ from flask import g, render_template, request, redirect, url_for, session, flash
 from application import app
 from application.models import  User, Album, Song
 from application.database import db
+from sqlalchemy import and_, not_, or_
 
 app.secret_key = 'development key'  
 
@@ -30,18 +31,21 @@ def addadmin():
 @app.route('/')
 def index():
     try:
-        albums = Album.query.all()
-        print(albums, 'albums')
-        songs = Song.query.all()
-        for song in songs:
-            song.image = base64.b64encode(song.image).decode('utf-8')
+        # albums = Album.query.all()
+        # print(albums, 'albums')
+        # songs = Song.query.all()
+        # for song in songs:
+        #     song.image = base64.b64encode(song.image).decode('utf-8')
         if g.user:
             if g.user.role == 'admin':
                 return redirect(url_for('adminDashboard'))
             elif g.user.role == 'creator':
-                return redirect(url_for('creatorDashboard'))
+                # return redirect(url_for('index.html', songs=songs, user=session['name'], albums=albums, creator=True))
+                return render_template('index.html')
             else:
-                return render_template('index.html', songs=songs, user=session['name'], albums=albums) 
+                # return render_template('index.html', songs=songs, user=session['name'], albums=albums) 
+                return render_template('index.html')
+            
         return render_template('login.html')
     except Exception as e:
         print(e, 'error')
@@ -74,17 +78,19 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        user = User.query.filter_by(email=email, role='user').first()
+        user = user = User.query.filter(and_(User.email == email, User.role.in_(['user', 'creator']))).first()
+        print(user, 'user', '\n'*10)
         if user and user.password == password:
             session['id'] = user.id
             session['email'] = user.email
             session['name'] = user.name
             session['city'] = user.city
             session['role'] = user.role
+            print(session['name'], session['name'], 'session')
             flash('You were successfully logged in', 'success')
             return redirect(url_for('index'))
         else:
-            return render_template('index.html', error='Invalid username or password')
+            return render_template('login.html', error='Invalid username or password')
     else:
         return render_template('login.html')
 
@@ -119,7 +125,7 @@ def adminDashboard():
 
 @app.route('/creator', methods=['GET', 'POST'])
 def creatorDashboard():
-    if request.args.get('H'):
+    if request.args.get('H') and g.user.role != 'admin':
         user = User.query.get(session['id'])
         user.role = 'creator'
         db.session.commit()
@@ -185,10 +191,8 @@ def viewalbums():
 
 
 @app.route('/addsong', methods=['GET', 'POST'])
-def addsong(id):
-    if g.user and session['role'] == 'admin':
-        artist = Album.query.get(id)
-        
+def addsong():
+    if g.user and session['role'] == 'creator':
         if request.method == 'POST':
             name = request.form['name']
             genre = request.form['genre']
@@ -196,14 +200,19 @@ def addsong(id):
             lyrics = request.form['lyrics']
             duration = request.form['duration']
             date_created = request.form['date_created']
+            try:
+                album_id = request.form['album_id']
+            except:
+                album_id = None
+            artist_id = session['id']
             
-            song = Song(name, image, duration, date_created,lyrics, artist.id, genre )
+            song = Song(name,genre,duration, artist_id, image,  date_created, lyrics, album_id )
             song.image = image
             db.session.add(song)
             db.session.commit()
-            return redirect(url_for('adminDashboard'))
-        return render_template('addsong.html', artist=artist)
-    return redirect(url_for('adminlogin'))
+            return redirect(url_for('creatorDashboard'))
+        return render_template('addsong.html')
+    return redirect(url_for('index'))
 
 
 @app.route('/editsong/<int:id>', methods=['GET', 'POST'])
