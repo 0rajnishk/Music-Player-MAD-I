@@ -32,7 +32,8 @@ class Album(db.Model):
 
 class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    image = db.Column(db.LargeBinary)  # Use LargeBinary for binary data like images
+    audio_file = db.Column(db.LargeBinary)  # New column for audio file
+    image = db.Column(db.LargeBinary)
     name = db.Column(db.String(128), unique=True, nullable=False)
     genre = db.Column(db.String(128), nullable=False)
     duration = db.Column(db.Integer, nullable=False)
@@ -42,15 +43,17 @@ class Song(db.Model):
     album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=True)
     ratings = db.relationship('SongRating', backref='song', lazy=True)
 
-    def __init__(self, name, genre, duration, artist_id, image, date, lyrics, album_id):
+    def __init__(self, name, genre, duration, artist_id, audio_file, image, date, lyrics, album_id):
         self.name = name
         self.genre = genre
         self.duration = duration
         self.artist_id = artist_id
+        self.audio_file = audio_file  # Set the audio file
         self.image = image
         self.date = date
         self.lyrics = lyrics
         self.album_id = album_id
+
 
 class Artist (db.Model):
     id = db.Column(db.Integer, primary_key=True)
