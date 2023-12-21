@@ -1,0 +1,26 @@
+{% extends 'login.html' %}
+{% block login_signup %}
+{% if alert %}
+<script>
+    alert("{{ alert }}")
+</script>
+{% endif %}
+<div class="container">
+    <div class="frontbox" style="margin-right: 150px;">
+        <div class="login">
+
+            <h2>Update Profile </h2>
+            <form action="{{ url_for('adminlogin') }}" method="POST">
+                <div class="inputbox">
+                    <input type="text" name="name" placeholder="" value="{{user.name}}">
+                    <input type="text" name="email" placeholder="email" value="{{user.email}}">
+                    <input type="password" name="password" placeholder="****" value="{{user.password}}">
+                </div>
+                <button type="submit" style="bottom:40px;">LOG IN</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% block footer %}
+{% endblock footer %}
+{% endblock login_signup %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block profile %}
+{% block search %}
+{% endblock search %}
+<a class="lofi" href="/logout">Logout</a>
+{% endblock profile %}
+
+{% block head %}
+{% endblock head %}
+
+
+{% block sidenav %}
+<style>
+    .sublist {
+        margin-left: 40px;
+        margin: 10px;
+        text-align: center;
+    }
+</style>
+<div class="sidenav" style="width: 200px; margin-top:-90px;">
+    <div class="admin_db">
+        <div class="side-nav-div" style="font-weight: bold;">
+            <ul class="sidenav__list">
+                <li class="list">Dashboard</li>
+                <a href="">
+                    <p class="sublist lofi">anylitics</p>
+                </a>
+                <a href="/addsong">
+                    <p class="sublist lofi"> Add
+                        song</p>
+                </a>
+                <a href="/addalbum">
+                    <p class="sublist lofi">Add album</p>
+                </a>
+                <br>
+            </ul>
+        </div>
+    </div>
+</div>
+{% if alert %}
+<script>
+    alert("{{ alert }}")
+</script>
+{% endif %}
+
+{% endblock sidenav %}
+
+
+{% block body %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/content.css') }}">
+<div style="margin-top: 75px; margin-left: 250px">
+    <h1 style="margin-left: 90px;">{{album.name}}</h1>
+    <div class="container" style="display:flex;">
+        <div class="boxes-flex">
+            {% for song in songs %}
+            <div class="boxes">
+                <img src="data:image/jpeg;base64,{{ song.image|img_to_base64 }}" alt="Song 1" height="100px"
+                    width="100px">
+                <div class="overlay">
+                    <div class="play-b">
+                        <a href="/editsong/{{song.id}}">
+                            <img src="{{ url_for('static', filename='image/edit.png') }}" alt="edit-song">
+                        </a>
+                        <a href="/deletesong/{{song.id}}">
+                            <img src="{{ url_for('static', filename='image/delete.png') }}" alt="delete-song">
+                        </a>
+                    </div>
+                </div>
+                <p style="overflow: hidden;">{{song.name}} </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% endblock body %}
+
+    {% block jfooter %}
+    {% endblock jfooter%}

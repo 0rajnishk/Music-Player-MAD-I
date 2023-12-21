@@ -32,6 +32,7 @@ body {
     padding: 6px;
     width: 300px;
     background-color: #ffffff;
+    text-decoration: #000000;
     border: 0.5px solid #000000;
     border-radius: 10px 0px 0px 10px;
 }
@@ -46,9 +47,7 @@ body {
 }
 
 .search-bar :hover {
-    background-color: #000000;
-    color: #ffffff;
-
+    background-color: #8c8c8c;
 }
 
 .nav-links {

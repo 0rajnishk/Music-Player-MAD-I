@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block profile %}
+<div class="nav-links">
+    <a href="/creator" class="lofi">Creator Account</a>
+    <a href="/logout" class="lofi">Logout</a>
+</div>
+{% endblock profile %}
+{% block sidenav %}
+<div class="sidenav">
+    <ul class="sidenav__list">
+        <li>
+            <h3>Browse</h3>
+        </li>
+
+        <li class="list"><a href="/#devotional" class="sidenav__list-item">Devotional</a></li>
+        <li class="list"><a href="/#bollywood" class="sidenav__list-item">Bollywood</a></li>
+        <li class="list"><a href="/#newreleases" class="sidenav__list-item">New Releases</a></li>
+        <li class="list"><a href="/myplaylist" class="sidenav__list-item">My playlist</a></li>
+        <li class="list"><a href="/viewallsongs" class="sidenav__list-item">All songs</a></li>
+        <br>
+        <hr color="black" width="120%" size="10" style="margin-top:-3px; margin-left:-40px; ">
+    </ul>
+    <h5 style="color: rgb(0, 0, 0); margin-left:30px;">Recently Played</h5>
+    <div class="recently-played">
+        {% for song in recentlyplayed %}
+        <div class="play-btn" style="cursor: pointer;" data-audio="{{ song.song_id }}">
+            <p> {{ song.song_id|song_name }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock sidenav %}
+
+{% block body %}
+{% if alert %}
+<script>
+    alert("{{ alert }}");
+</script>
+{% endif %}
+
+<div style="margin-left: 250px;">
+    <br>
+    <br>
+    <br>
+    <h1>Albums</h1>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/content.css') }}">
+    <div class="album-list">
+
+        <br>
+        <br>
+
+        {% for album in albums %}
+        <div class="album">
+            <a href="/viewalbum/{{album.id}}">
+                <h4>{{album.name}}</h4>
+                <h4>singer: {{album.singer}} </h4>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}
+
+{% block jfooter %}
+
+{% endblock jfooter %}

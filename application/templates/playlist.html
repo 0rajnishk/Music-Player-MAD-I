@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block profile %}
+<div class="nav-links">
+    <a href="/creator" class="lofi">Creator Account</a>
+    <a href="/logout" class="lofi">Logout</a>
+</div>
+{% endblock profile %}
+{% block sidenav %}
+<div class="sidenav" style="margin-top: -50px;">
+    <ul class="sidenav__list">
+        <li>
+            <h3>Browse</h3>
+        </li>
+
+        <li class="list"><a href="/#devotional" class="sidenav__list-item">Devotional</a></li>
+        <li class="list"><a href="/#bollywood" class="sidenav__list-item">Bollywood</a></li>
+        <li class="list"><a href="/#newreleases" class="sidenav__list-item">New Releases</a></li>
+        <li class="list"><a href="/myplaylist" class="sidenav__list-item">My playlist</a></li>
+        <li class="list"><a href="/viewallsongs" class="sidenav__list-item">All songs</a></li>
+        <br>
+        <hr color="black" width="120%" size="10" style="margin-top:-3px; margin-left:-40px; ">
+    </ul>
+    <h5 style="color: rgb(0, 0, 0); margin-left:30px;">Recently Played</h5>
+    <div class="recently-played">
+        {% for song in recentlyplayed %}
+        <div class="play-btn" style="cursor: pointer;" data-audio="{{ song.song_id }}">
+            <p> {{ song.song_id|song_name }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock sidenav %}
+
+{% block body %}
+
+{% if alert %}
+<script>
+    alert("{{ alert }}");
+</script>
+{% endif %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/content.css') }}">
+<div style="margin-top: 55px; margin-left: 250px">
+    <h1 style="margin-left: 90px;">{{playlist.name}}</h1>
+    <div class="container">
+        <div class="boxes-flex">
+            {% for song in songs %}
+            <div class="boxes">
+                <img src="data:image/jpeg;base64,{{ song.image|img_to_base64 }}" alt="Song 1" height="180px"
+                    width="180px">
+                <div class="overlay">
+                    <div class="play-btn">
+                        <a href="/deletesongfromplaylist/{{ playlist_id }}/{{song.id}}">
+                            <img src="{{ url_for('static', filename='image/delete.png') }}" alt="delete-song">
+                        </a>
+                    </div>
+                    <div class="play-btn play-b" data-audio="{{ song.id }}">
+                        <img src="{{ url_for('static', filename='image/play-button.png') }}" alt="play">
+                    </div>
+                </div>
+                <p style="overflow: hidden;">{{song.name}} </p>
+            </div>
+            {% endfor %}
+        </div>
+
+
+        {% endblock body %}
+        {% block jfooter %}
+
+        {% endblock jfooter %}

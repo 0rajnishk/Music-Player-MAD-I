@@ -1,0 +1,165 @@
+body {
+    background-image: url("{{  url_for('static', filename='image/ggg.gif?size=2300' )}}");
+    background-size: cover;
+    background-image: url("https://img.freepik.com/free-photo/abstract-watercolor-guitar-exploding-with-colorful-motion-generated-by-ai_188544-19725.jpg?size=1226");
+    background-color: rgb(217, 255, 255);
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    width: 600px;
+    height: 350px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-flex;
+}
+
+.backbox {
+    background-color: #2e2d2dd7;
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    transform: translate(0, -50%);
+    top: 50%;
+    display: inline-flex;
+    border-radius: 40px;
+
+}
+
+.frontbox {
+    background-color: rgb(120, 120, 120);
+    border-radius: 20px;
+    height: 100%;
+    width: 50%;
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    margin-right: 3%;
+    margin-left: 3%;
+    transition: right .4s ease-in-out;
+}
+
+.moving {
+    right: 45%;
+}
+
+.loginMsg,
+.signupMsg {
+    width: 50%;
+    height: 100%;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.loginMsg .title,
+.signupMsg .title {
+    font-weight: 300;
+    font-size: 23px;
+}
+
+.loginMsg p,
+.signupMsg p {
+    font-weight: 100;
+}
+
+.textcontent {
+    color: white;
+    margin-top: 65px;
+    font-weight: 250;
+    margin-left: 12%;
+}
+
+.loginMsg button,
+.signupMsg button {
+    cursor: pointer;
+    background-color: #404040;
+    border: 2px solid white;
+    border-radius: 10px;
+    color: white;
+    font-size: 12px;
+    box-sizing: content-box;
+    font-weight: 300;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.login,
+.signup {
+    padding: 20px;
+    text-align: center;
+}
+
+.login h2,
+.signup h2 {
+    color: #ffffff;
+    font-size: 22px;
+}
+
+.inputbox {
+    margin-top: 30px;
+}
+
+.inputbox input,
+.inputbox select {
+    padding-left: 5px;
+    border-radius: 10px;
+}
+
+.login input,
+.signup input,
+.login select {
+    display: block;
+    width: 100%;
+    height: 40px;
+    background-color: #f2f2f2;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.back {
+    background-color: #ffffff;
+    border-radius: 10px;
+    height: 100%;
+    width: 40%;
+}
+
+.login button,
+.signup button {
+    background-color: #2975b7;
+    border: none;
+    color: white;
+    font-size: 12px;
+    font-weight: 300;
+    box-sizing: content-box;
+    padding: 10px;
+    border-radius: 10px;
+    width: 60px;
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    cursor: pointer;
+}
+
+
+.login p {
+    cursor: pointer;
+    color: #404040;
+    font-size: 15px;
+}
+
+.loginMsg,
+.signupMsg {
+    /*opacity: 1;*/
+    transition: opacity .8s ease-in-out;
+}
+
+.visibility {
+    opacity: 0;
+}
+
+.hide {
+    display: none;
+}

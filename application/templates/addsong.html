@@ -1,50 +1,69 @@
 {% extends 'base.html' %}
 {% block profile %}
-
 {% block search %}
 {% endblock %}
-<a class="nav-link" href="/logout">Logout</a>
+<a class="lofi" href="/logout">Logout</a>
 {% endblock profile %}
-{% block body %}
 
+{% block body %}
+<br>
+<br>
+<br>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css')}}">
 {% block sidenav %}
 
 {% endblock sidenav %}
-<div class="addalbum">
-        <h2 class="mb-4 text-center">Add Product</h2>
-        <form action="/addsong" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="name">Song Name</label>
-                <input type="text" name="name" placeholder="Song Name" class="form-control" id="name" required>
-            </div>
 
-            <div class="form-group">
-                <label for="lyrics">Lyrics</label>
-                <input type="text" name="lyrics" placeholder="lyrics" class="form-control" id="lyrics" required>
-            </div>
-            <div class="form-group">
-                <label for="date-created">Date created</label>
-                <input type="date" name="date_created" placeholder="Enter Manufacture Date" class="form-control"
-                    id="date-created" required>
-            </div>
-            <div class="form-group">
-                <label for="genre">Genre</label>
-                <input type="text" name="genre" placeholder="genre" class="form-control" step="0.1" id="genre" required>
-            </div>
-            <div class="form-group">
-                <label for="song-cover">Upload song cover</label>
-                <input type="file" name="image" id="song-cover" required>
-            </div>
+{% block login_signup %}
+{% if alert %}
+<script>
+    alert("{{ alert }}")
+</script>
+{% endif %}
+<div class="container">
+    <div class="frontbox" style="margin-right: 50px; height:450px; width:400px !important;">
+        <div class="login">
+            <h2>Add Song</h2>
+            <form action="/addsong" method="POST" enctype="multipart/form-data">
+                <div class="inputbox">
+                    <div class="left">
+                        <input type="text" name="name" placeholder="Song Name" class="form-control" id="name" required>
+                    </div>
 
-            <div class="form-group">
-                <label for="duration">Duration</label>
-                <input type="number" name="duration" placeholder="duration" class="form-control" id="duration"
-                    step="0.001">
-                <div class="text-center">
-                    <input type="submit" value="submit" class="btn btn-primary mt-3">
+                    <div class="right">
+                        <input type="text" name="singer" placeholder="Singer" class="form-control" id="singer" required>
+                    </div>
+                    <div class="left">
+                        <input type="text" name="genre" placeholder="Genre" class="form-control" id="genre" required>
+                    </div>
+
+                    <div class="right">
+                        <input type="date" name="date_created" class="form-control" id="date-created" required>
+                    </div>
+
+                    <textarea name="lyrics" placeholder="Lyrics" class="form-control" id="lyrics" required></textarea>
+
+                    <input type="text" name="album_id" value="{{album_id}}" style="display: none;">
+
+
+                    <div class="left">
+                        <label for="song-cover">Upload song cover</label>
+                        <input type="file" name="image" id="song-cover" required>
+                    </div>
+                    <div class="left">
+                        <label for="song">Upload the song</label>
+                        <input type="file" name="song" id="song" required>
+                    </div>
                 </div>
-        </form>
+                <button type="submit" style="bottom: 50px;">submit</button>
+            </form>
+        </div>
     </div>
 </div>
+{% endblock login_signup %}
+
+
 
 {% endblock body %}
+{% block footer %}
+{% endblock footer %}

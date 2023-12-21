@@ -2,6 +2,12 @@
     margin-left: 240px;
 }
 
+.nav-links .mdi {
+    font-size: 32px;
+    color: #000000;
+    font-weight: bolder;
+}
+
 .song-list {
     display: flex;
     flex-wrap: wrap;
@@ -9,16 +15,16 @@
 }
 
 .song {
-    width: 200px;
-    margin: 10px;
+    width: 140px;
+    margin: 20px;
     position: relative;
 }
 
 .artist {
-    width: 200px;
+    cursor: pointer;
+    width: 140px;
     margin: 10px;
     position: relative;
-    /* height: 200px; */
     border-radius: 100%;
     overflow: hidden;
 
@@ -44,7 +50,9 @@ img {
     transition: opacity 0.5s;
 }
 
-.play-btn {
+.play-b {
+    cursor: pointer !important;
+    margin-right: 5px;
     height: 50px;
     width: 50px;
     color: white;
@@ -76,4 +84,133 @@ img {
     padding-left: 15px;
     color: rgb(0, 0, 0);
     font-weight: bold;
+}
+
+
+/* Content: search result|| View album|| */
+
+
+.container {
+    margin: auto;
+}
+
+.boxes {
+    display: block;
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 2px 23px 34px 16px rgba(0, 0, 0, 0.1);
+    background: rgb(255, 231, 231);
+    position: relative;
+    overflow: auto;
+    float: left;
+    margin: 1.5%;
+}
+
+.boxes-flex {
+    flex: 1 0 calc(33.33% - 40px);
+    margin: auto;
+}
+
+.box {
+    flex: 1 0 calc(33.33% - 20px);
+    margin: auto;
+}
+
+.box p {
+    border: solid rgb(78, 76, 76) 1px;
+    width: auto;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 5px;
+    overflow: hidden;
+    float: left;
+    margin: 1.5%;
+    cursor: pointer;
+}
+
+h3 {
+    font-weight: 10px;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-bottom: 20%;
+    width: 100%;
+    height: 75.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+
+.play-b {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s;
+}
+
+.play-b img {
+    cursor: pointer;
+    margin: auto;
+    height: 5px;
+    width: 5px;
+}
+
+.overlay img {
+    margin: auto;
+    height: 50px;
+    width: 50px;
+}
+
+.boxes:hover .overlay {
+    opacity: 2;
+
+}
+
+.album-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    margin-top: 50px;
+}
+
+.album-list .album {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    background-color: bisque;
+    border: 1px solid black;
+    border-radius: 60px;
+    width: 250px;
+}
+
+.album-list .album a {
+    font-weight: bolder;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+.album-list .album:hover {
+    background-color: rgb(0, 2, 96);
+}
+
+.album-list .album:hover a {
+    color: white;
+}
+
+.play-btn {
+    cursor: pointer;
 }

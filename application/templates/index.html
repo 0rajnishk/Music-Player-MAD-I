@@ -1,128 +1,194 @@
 {% extends 'base.html' %}
-
 {% block profile %}
 <div class="nav-links">
   <a href="/creator" class="lofi">Creator Account</a>
-  <a href="/logout" class="lofi">Logout</a>
-  {% endblock profile %}
+  <a href="/profile"> <span class="mdi mdi-account-circle"></span></a>
+  <a href="/logout"><span class="mdi mdi-logout-variant"></span></a>
+</div>
+{% endblock profile %}
+{% block sidenav %}
+<div class="sidenav">
+  <ul class="sidenav__list">
+    <br>
+    <li>
+      <h3>Browse</h3>
+    </li>
 
-
-  {% block body %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/content.css') }}" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    integrity="sha384-KyZXEAg3QhqLMpG8r+4zgpq49K3hZ2aYw2S9OFv92PJS/Fi3WYKMfj4Z+d5g86cl" crossorigin="anonymous">
-
-  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel"
-    style="padding-top: 65px; margin-left: 240px;">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="{{ url_for('static', filename='image/Hero4.jpg') }}" class="d-block w-100" alt="..." />
-      </div>
-      <div class="carousel-item">
-        <img src="{{ url_for('static', filename='image/Hero3.jpg') }}" class="d-block w-100" alt="..." />
-      </div>
-      <div class="carousel-item">
-        <img src="{{ url_for('static', filename='image/Hero2.jpg') }}" class="d-block w-100" alt="..." />
-      </div>
+    <li class="list"><a href="#devotional" class="sidenav__list-item">Devotional</a></li>
+    <li class="list"><a href="#bollywood" class="sidenav__list-item">Bollywood</a></li>
+    <li class="list"><a href="#newreleases" class="sidenav__list-item">New Releases</a></li>
+    <li class="list"><a href="/myplaylist" class="sidenav__list-item">My playlist</a></li>
+    <li class="list"><a href="/viewallsongs" class="sidenav__list-item">All songs</a></li>
+    <br>
+    <hr color="black" width="120%" size="10" style="margin-top:-3px; margin-left:-40px; ">
+  </ul>
+  <h5 style="color: rgb(0, 0, 0); margin-left:30px;">Recently Played</h5>
+  <div class="recently-played">
+    {% for song in recentlyplayed %}
+    <div class="play-btn" style="cursor: pointer;" data-audio="{{ song.song_id }}">
+      <p> {{ song.song_id|song_name }}</p>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-      data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-      data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+    {% endfor %}
+  </div>
+</div>
+{% endblock sidenav %}
+
+
+{% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/content.css') }}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  integrity="sha384-KyZXEAg3QhqLMpG8r+4zgpq49K3hZ2aYw2S9OFv92PJS/Fi3WYKMfj4Z+d5g86cl" crossorigin="anonymous">
+
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel"
+  style="padding-top: 90px; margin-left: 240px;">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{{ url_for('static', filename='image/Hero4.jpg') }}" class="d-block w-100" alt="..." />
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='image/Hero3.jpg') }}" class="d-block w-100" alt="..." />
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='image/Hero2.jpg') }}" class="d-block w-100" alt="..." />
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<!-- content starts here -->
+<div class="content">
+  <h3 style="padding:30px" id="Trending"> Trending </h3>
+  <div class="song-list">
+    {% for song in trendingsongs %}
+    <div class="song">
+      <img src="data:image/jpeg;base64,{{ song.image|img_to_base64 }}" type="img/jpeg" alt="Song {{ song.name }}">
+      <div class="overlay">
+        <div class="play-btn" data-audio="{{ song.id }}">
+          <img src="{{ url_for('static', filename='image/play-button.png') }}" alt="play-btn-img">
+        </div>
+      </div>
+      <div class="songname">{{ song.name }} </div>
+      <p>{{ (song.singer) }} </p>
+    </div>
+    {% endfor %}
+    {% if len_trending_song > 4 %}
+    <div style="margin-top:50px; font-size:50px; cursor: pointer;">
+      <form action="/play" method="post">
+        <input type="hidden" name="title" value="newrelease">
+        <button type="submit"><span class="mdi mdi-chevron-right"></span></button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+
+  <h3 style="padding:30px">Top Albums</h3>
+  <div class="album-list">
+    {% for album in albums %}
+    <div class="album">
+      <a href="/viewalbum/{{album.id}}">
+        <h5>{{album.name}}</h5>
+        <h6>singer: {{album.singer}} </h6>
+      </a>
+    </div>
+    {% endfor %}
+    {% if len_album > 4 %}
+    <div style="margin-top:50px; font-size:50px; cursor: pointer;">
+      <form action="/viewallsongs" method="post">
+        <input type="hidden" name="title" value="album">
+        <button type="submit"><span class="mdi mdi-chevron-right"></span></button>
+      </form>
+    </div>
+    {% endif %}
   </div>
 
 
-  <!-- content starts here -->
-  <div class="content">
-    <h3 style="padding:30px" id="trending">Trending</h3>
-    <div class="song-list">
-      {% for i in range(1, 5) %}
 
-      <div class="song">
-        <img src="{{ url_for('static', filename='image/cover/square.avif') }}" alt="Song 1">
-        <div class="overlay">
-          <div class="play-btn">
-            <img src="{{ url_for('static', filename='image/play-button.png') }}" alt="song-img">
-          </div>
+
+  <h3 style="padding:30px" id="devotional">Devotional Songs</h3>
+  <div class="song-list">
+    {% for song in devotional %}
+    <div class="song">
+      <img src="data:image/jpeg;base64,{{ song.image|img_to_base64 }}" type="img/jpeg" alt="Song {{ song.name }}">
+      <div class="overlay">
+        <div class="play-btn" data-audio="{{ song.id }}">
+          <img src="{{ url_for('static', filename='image/play-button.png') }}" alt="play-btn-img">
         </div>
-        <div class="songname">Song {{i}} </div>
-        <p>Artist name {{i}} </p>
       </div>
-      {% endfor %}
+      <div class="songname">{{ song.name }} </div>
+      <p>{{ (song.singer) }} </p>
     </div>
-    <h3 style="padding:30px" id="newreleases">New Releases</h3>
-    <div class="song-list">
-      {% for i in range(1, 5) %}
-
-      <div class="song">
-        <img src="{{ url_for('static', filename='image/cover/..ready_for_it.jpg') }}" alt="Song 1">
-        <div class="overlay">
-          <div class="play-btn">
-            <img src="{{ url_for('static', filename='image/play-button.png') }}" alt="song-img">
-          </div>
-        </div>
-        <div class="song-name">Song {{i}} </div>
-      </div>
-      {% endfor %}
+    {% endfor %}
+    {% if len_devotional_song > 4 %}
+    <div style="margin-top:50px; font-size:50px; cursor: pointer;">
+      <form action="/viewallsongs" method="post">
+        <input type="hidden" name="title" value="devotional">
+        <button type="submit"><span class="mdi mdi-chevron-right"></span></button>
+      </form>
     </div>
-    <h3 style="padding:30px" id="topartist">Top Artist</h3>
-    <div class="song-list">
-      {% for i in range(1, 5) %}
-
-      <div class="song">
-        <div class="artist">
-          <img src="{{ url_for('static', filename='image/cover/..ready_for_it.jpg') }}" style="height: 200px;"
-            alt="Song 1">
-          <div class="overlay">
-
-          </div>
-        </div>
-        <div class="artist-name">Artist name {{i}} </div>
-      </div>
-      {% endfor %}
-    </div>
-
-    <h3 style="padding:30px" id="topplaylist">Top Playlist</h3>
-    <div class="song-list">
-      {% for i in range(1, 5) %}
-
-      <div class="song">
-        <img src="{{ url_for('static', filename='image/cover/..ready_for_it.jpg') }}" alt="Song 1">
-        <div class="overlay">
-          <div class="play-btn">
-            <img src="{{ url_for('static', filename='image/play-button.png') }}" alt="song-img">
-          </div>
-        </div>
-        <div class="song-name">Song {{i}} </div>
-      </div>
-      {% endfor %}
-    </div>
-    <h3 style="padding:30px" id="topalbums">Top Albums</h3>
-    <div class="song-list">
-      {% for i in range(1, 5) %}
-
-      <div class="song">
-        <img src="{{ url_for('static', filename='image/cover/..ready_for_it.jpg') }}" alt="Song 1">
-        <div class="overlay">
-          <div class="play-btn">
-            <img src="{{ url_for('static', filename='image/play-button.png') }}" alt="song-img">
-          </div>
-        </div>
-        <div class="song-name">Song {{i}} </div>
-      </div>
-      {% endfor %}
-    </div>
+    {% endif %}
   </div>
 
 
-  {% endblock body %}
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+  <h3 style="padding:30px" id="bollywood">Bollywood Songs</h3>
+  <div class="song-list">
+    {% for song in bollywood %}
+    <div class="song">
+      <img src="data:image/jpeg;base64,{{ song.image|img_to_base64 }}" type="img/jpeg" alt="Song {{ song.name }}">
+      <div class="overlay">
+        <div class="play-btn" data-audio="{{ song.id }}">
+          <img src="{{ url_for('static', filename='image/play-button.png') }}" alt="play-btn-img">
+        </div>
+      </div>
+      <div class="songname">{{ song.name }} </div>
+      <p>{{ (song.singer) }} </p>
+    </div>
+    {% endfor %}
+    {% if len_bollywood_song > 4 %}
+    <div style="margin-top:50px; font-size:50px; cursor: pointer;">
+      <form action="/viewallsongs" method="post">
+        <input type="hidden" name="title" value="bollywood">
+        <button type="submit"><span class="mdi mdi-chevron-right"></span></button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+
+  <h3 style="padding:30px" id="newreleases">Newly Released songs</h3>
+  <div class="song-list">
+    {% for song in songs %}
+    <div class="song">
+      <img src="data:image/jpeg;base64,{{ song.image|img_to_base64 }}" type="img/jpeg" alt="Song {{ song.name }}">
+      <div class="overlay">
+        <div class="play-btn" data-audio="{{ song.id }}">
+          <img src="{{ url_for('static', filename='image/play-button.png') }}" alt="play-btn-img">
+        </div>
+      </div>
+      <div class="songname">{{ song.name }} </div>
+      <p>{{ (song.singer) }} </p>
+    </div>
+    {% endfor %}
+    {% if len_song > 4 %}
+    <div style="margin-top:50px; font-size:50px; cursor: pointer;">
+      <form action="/viewallsongs" method="post">
+        <input type="hidden" name="title" value="newrelease">
+        <button type="submit"><span class="mdi mdi-chevron-right"></span></button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+
+
+{% endblock body %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </div>
 </div>

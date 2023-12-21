@@ -1,76 +1,82 @@
 from application.database import db
+from datetime import datetime
+
+# Define the association table first
+playlist_song = db.Table('playlist_song',
+    db.Column('playlist_id', db.Integer, db.ForeignKey('playlist.id')),
+    db.Column('song_id', db.Integer, db.ForeignKey('song.id'))
+)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(128), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     name = db.Column(db.String(128), nullable=False)
-    city = db.Column(db.String(128))
     role = db.Column(db.String(128), default='user', nullable=False)
-    playlist_song = db.Table('playlist_song',
-    db.Column('playlist_id', db.Integer, db.ForeignKey('playlist.id')),
-    db.Column('song_id', db.Integer, db.ForeignKey('song.id'))
-)
-    def __init__(self, email, password, name, city, role):
+    blacklist = db.Column(db.Boolean, default=False, nullable=False)
+
+    def __init__(self, email, password, name, role):
         self.email = email
         self.password = password
         self.name = name
-        self.city = city
         self.role = role
+
+    def blacklist_user(self):
+        self.blacklist = True
+        db.session.commit()
+    def unblacklist_user(self):
+        self.blacklist = False
+        db.session.commit()
 
 class Album(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), unique=True, nullable=False)
+    singer = db.Column(db.String(128))
     genre = db.Column(db.String(128))
-    artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'), nullable=False)  # Add artist_id
-    songs = db.relationship('Song', backref='album', lazy=True, primaryjoin='Album.id == Song.album_id')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) 
+    songs = db.relationship('Song', backref='album', lazy=True)
 
-    def __init__(self, name, genre, artist_id):
+    def __init__(self, name, singer, user_id, genre):
         self.name = name
+        self.singer = singer
+        self.user_id = user_id
         self.genre = genre
-        self.artist_id = artist_id
 
 class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    audio_file = db.Column(db.LargeBinary)  # New column for audio file
-    image = db.Column(db.LargeBinary)
     name = db.Column(db.String(128), unique=True, nullable=False)
-    genre = db.Column(db.String(128), nullable=False)
-    duration = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    audio_file = db.Column(db.LargeBinary)  
+    image = db.Column(db.LargeBinary)
+    genre = db.Column(db.String(128))
     date = db.Column(db.String)
-    lyrics = db.Column(db.String(128), nullable=False)
-    artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'), nullable=False)
-    album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=True)
+    lyrics = db.Column(db.String(10000), nullable=False)
+    singer = db.Column(db.String(128), nullable=False)
+    play_count = db.Column(db.Integer, default=0, nullable=False)
+    album_id = db.Column(db.Integer, db.ForeignKey('album.id'), default=None)
     ratings = db.relationship('SongRating', backref='song', lazy=True)
+    comments = db.relationship('Comment', backref='song', lazy=True)
 
-    def __init__(self, name, genre, duration, artist_id, audio_file, image, date, lyrics, album_id):
-        self.name = name
-        self.genre = genre
-        self.duration = duration
-        self.artist_id = artist_id
-        self.audio_file = audio_file  # Set the audio file
+    def __init__(self, name, user_id, audio_file, image, date, lyrics, singer, album_id, genre):
+        self.name = name    
+        self.user_id = user_id
+        self.audio_file = audio_file  
         self.image = image
         self.date = date
         self.lyrics = lyrics
+        self.singer = singer  
         self.album_id = album_id
-
-
-class Artist (db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128), unique=True, nullable=False)
-    genre = db.Column(db.String(128))
-    albums = db.relationship('Album', backref='artist', lazy=True)
-
-    def __init__(self, name, genre):
-        self.name = name
-        self.genre = genre
-
+        self.genere = genre
+        
+    def increment_play_count(self):
+        self.play_count += 1
+        db.session.commit()
 
 class Playlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    songs = db.relationship('Song', secondary='playlist_song', backref='playlists', lazy='dynamic')
+    songs = db.relationship('Song', secondary=playlist_song, backref='playlists', lazy='dynamic')
 
     def __init__(self, name, user_id):
         self.name = name
@@ -86,3 +92,26 @@ class SongRating(db.Model):
         self.user_id = user_id
         self.song_id = song_id
         self.rating = rating
+
+# comments
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    song_id = db.Column(db.Integer, db.ForeignKey('song.id'),nullable=False)
+    comment = db.Column(db.String(10000), nullable=False)
+
+    def __init__(self, user_id, song_id, comment):
+        self.user_id = user_id
+        self.song_id = song_id
+        self.comment = comment
+
+# recently played songs
+class RecentlyPlayedSongs(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    song_id = db.Column(db.Integer, db.ForeignKey('song.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+
+    def __init__(self, song_id, user_id):
+        self.song_id = song_id
+        self.user_id = user_id
