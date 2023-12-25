@@ -15,6 +15,12 @@
 ![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled5.png "Login page")
 
 
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled6.png "Login page")
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled7.png "Login page")
+
+
+
 
 
 
