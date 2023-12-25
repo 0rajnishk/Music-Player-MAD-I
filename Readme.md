@@ -1,7 +1,21 @@
 # Wave
 
 ## Screenshots
-![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled.png "a ss")
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled.png "Login page")
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled1.png "Login page")
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled2.png "Login page")
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled3.png "Login page")
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled4.png "Login page")
+
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled5.png "Login page")
+
+
+
 
 
 
