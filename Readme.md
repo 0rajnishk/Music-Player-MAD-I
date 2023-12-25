@@ -1,7 +1,7 @@
 # Wave
 
 ## Screenshots
-![Alt text](./ss/untitled.png "a ss")
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled.png "a ss")
 
 
 
