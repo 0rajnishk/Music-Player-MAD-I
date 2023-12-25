@@ -1,4 +1,9 @@
-# ChillWave
+# Wave
+
+## Screenshots
+![Alt text](./ss/untitled.png "a ss")
+
+
 
 ## Project Overview
 
