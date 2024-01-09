@@ -33,7 +33,7 @@ ChillWave is developed using the following technologies and tools:
 
 ## Project Structure
 
-## How to run this localy
+## How to run webapp localy
 
 ### create virtual env
 ```bash
@@ -55,7 +55,7 @@ python3 main.py
 ```
 
 
-
+```bash
 your_project/
     ├── app/
     |   ├── __init__.py
