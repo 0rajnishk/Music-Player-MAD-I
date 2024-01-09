@@ -53,7 +53,10 @@ pip install -r requirements.txt
 ```bash
 python3 main.py
 ```
-
+### Having issue running this on windows
+```bash
+switch to Linux 
+```
 
 ```bash
 your_project/
