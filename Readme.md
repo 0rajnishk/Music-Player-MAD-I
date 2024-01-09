@@ -31,7 +31,6 @@ ChillWave is developed using the following technologies and tools:
 - CSS: Cascading Style Sheets for designing and styling web pages.
 - JavaScript: A versatile scripting language used to add interactivity and dynamic features to the website.
 
-## Project Structure
 
 ## How to run webapp localy
 
@@ -58,6 +57,9 @@ python3 main.py
 switch to Linux 
 ```
 
+
+
+## Project Structure
 ```bash
 your_project/
     ├── app/
