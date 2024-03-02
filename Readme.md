@@ -1,5 +1,5 @@
-# Wave
-
+# MAD I project IITM BS Degree
+### App dev I project (MUSIC STREAMING WEB APP)
 ## Project Overview
 
 Welcome to the ChillWave project, an exciting music streaming website developed to provide users with an immersive and enjoyable audio experience. ChillWave serves as a platform where music enthusiasts can discover, listen to, and curate their favorite songs and playlists.
