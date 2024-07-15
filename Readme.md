@@ -1,5 +1,25 @@
 # MAD I project IITM BS Degree
 ### App dev I project (MUSIC STREAMING WEB APP)
+
+## Screenshots 
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled.png "Login page")
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled1.png "Login page")
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled2.png "Login page")
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled3.png "Login page")
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled4.png "Login page")
+
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled5.png "Login page")
+
+
+![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled6.png "Login page")
+
+
 ## Project Overview
 
 Welcome to the ChillWave project, an exciting music streaming website developed to provide users with an immersive and enjoyable audio experience. ChillWave serves as a platform where music enthusiasts can discover, listen to, and curate their favorite songs and playlists.
@@ -137,23 +157,6 @@ The development of the ChillWave project will progress through several key steps
 
 14. **Deploying the Application to a Hosting Platform:** Choose a suitable hosting platform, such as AWS, Heroku, or a dedicated server. Deploy the ChillWave application to make it accessible to users.
 
-## Screenshots 
-
-![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled.png "Login page")
-
-![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled1.png "Login page")
-
-![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled2.png "Login page")
-
-![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled3.png "Login page")
-
-![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled4.png "Login page")
-
-
-![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled5.png "Login page")
-
-
-![Alt text](https://github.com/0rajnishk/Music-Player-MAD-I/blob/main/ss/Untitled6.png "Login page")'
 
 
 ## Conclusion
